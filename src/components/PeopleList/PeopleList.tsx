@@ -32,10 +32,11 @@ export const PeopleList: React.FC<Props> = ({ peopleList }) => {
           <th>Father</th>
         </tr>
       </thead>
-
-      {modifiedPeopleList.map(person => (
-        <PersonRow key={person.slug} person={person} />
-      ))}
+      <tbody>
+        {modifiedPeopleList.map(person => (
+          <PersonRow key={person.slug} person={person} />
+        ))}
+      </tbody>
     </table>
   );
 };

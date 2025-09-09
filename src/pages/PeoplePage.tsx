@@ -1,4 +1,3 @@
-// import { ErrorMessage } from '../components/ErrorMessage/ErrorMessage';
 import { useEffect, useState } from 'react';
 import { PeopleList } from '../components/PeopleList/PeopleList';
 import { Person } from '../types';

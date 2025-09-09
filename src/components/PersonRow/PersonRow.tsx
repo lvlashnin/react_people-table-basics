@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
@@ -24,16 +25,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
     personName: string | null,
   ) => {
     if (personObject) {
-      return (
-        <Link
-          to={`${personObject.slug}`}
-          className={classNames({
-            'has-text-danger': personObject.sex === 'f',
-          })}
-        >
-          {personObject.name}
-        </Link>
-      );
+      return <PersonLink personObject={personObject} />;
     }
 
     if (personName === null) {
@@ -47,28 +39,26 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
   const isPersonSelected = pathname === `/people/${slug}`;
 
   return (
-    <tbody>
-      <tr
-        data-cy="person"
-        className={classNames({
-          'has-background-warning': isPersonSelected,
-        })}
-      >
-        <td>
-          <Link
-            to={`${slug}`}
-            className={classNames({ 'has-text-danger': sex === 'f' })}
-          >
-            {name}
-          </Link>
-        </td>
+    <tr
+      data-cy="person"
+      className={classNames({
+        'has-background-warning': isPersonSelected,
+      })}
+    >
+      <td>
+        <Link
+          to={`/people/${slug}`}
+          className={classNames({ 'has-text-danger': sex === 'f' })}
+        >
+          {name}
+        </Link>
+      </td>
 
-        <td>{sex}</td>
-        <td>{born}</td>
-        <td>{died}</td>
-        <td>{formatName(mother, motherName)}</td>
-        <td>{formatName(father, fatherName)}</td>
-      </tr>
-    </tbody>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{formatName(mother, motherName)}</td>
+      <td>{formatName(father, fatherName)}</td>
+    </tr>
   );
 };
