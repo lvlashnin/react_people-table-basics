@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
 import { PersonLink } from '../PersonLink/PersonLink';
@@ -8,27 +9,18 @@ type Props = {
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => {
-  const {
-    name,
-    sex,
-    born,
-    died,
-    fatherName,
-    motherName,
-    slug,
-    mother,
-    father,
-  } = person;
+  const { sex, born, died, fatherName, motherName, slug, mother, father } =
+    person;
 
   const formatName = (
     personObject: Person | undefined,
     personName: string | null,
   ) => {
     if (personObject) {
-      return <PersonLink personObject={personObject} />;
+      return <PersonLink person={personObject} />;
     }
 
-    if (personName === null) {
+    if (!personName) {
       return '-';
     }
 
@@ -46,12 +38,9 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
       })}
     >
       <td>
-        <Link
-          to={`/people/${slug}`}
-          className={classNames({ 'has-text-danger': sex === 'f' })}
-        >
-          {name}
-        </Link>
+        <td>
+          <PersonLink person={person} />
+        </td>
       </td>
 
       <td>{sex}</td>
